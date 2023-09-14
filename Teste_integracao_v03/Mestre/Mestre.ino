@@ -195,6 +195,19 @@ void processacomandoserial(){
       }
       Serial.println();      
       break;
+     
+    case 'm': // pega 1 frame e mostra a matriz
+      inicia_leitura_um_frame(1);
+      for (byte n = 0; n < num_eletrodos_usados*num_eletrodos_usados; n++){
+        Serial.print("(");
+        Serial.print(amplitudes_frame[n],3);
+        Serial.print(";");
+        Serial.print(fases_frame[n],3);
+        Serial.print(")\t");
+        if( (n%num_eletrodos_usados)== 0) Serial.println();
+      }
+      Serial.println();      
+      break;
 
     case 'a': // altear mux para padrão de injeção 1-2
       wire_envia_byte(0X60, 1);
