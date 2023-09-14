@@ -175,7 +175,7 @@ void processacomandoserial(){
         Serial.print(amplitudes_frame[n]);
         Serial.print("\t");
         Serial.print(fases_frame[n]);
-        Serial.print("\t");
+        Serial.println("\t");
       }
       Serial.println();      
       break;
