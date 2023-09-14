@@ -18,6 +18,8 @@
 
 byte comando = 0;
 
+long int contador = 0;
+
 void liga_canal(int canal){
   switch (canal) {
     case 0:
@@ -182,12 +184,10 @@ void dadorecebido(int howmany){
 }
 
 void processacomando(){
-  digitalWrite(LED, LOW); // Verificação de funcionamento
+  contador = 0;
   if(comando < 0xFF) liga_canal(comando);
   else liga_canal(0);
   comando = 0;
-  delay(2); // para ver o LED acesso
-  digitalWrite(LED, HIGH); // Verificação de funcionamento
 }
 
 void setup() {
@@ -198,5 +198,8 @@ void setup() {
 }
 
 void loop() {
+  contador = contador+1;
   if(comando!=0) processacomando();
+  if(contador>1000) digitalWrite(LED, HIGH); // Verificação de funcionamento
+  else digitalWrite(LED, LOW); // Verificação de funcionamento
 }
