@@ -175,11 +175,11 @@ void processacomandoserial(){
       Serial.println("Valores lidos:");
       
       for (byte n = 0; n < num_eletrodos_usados; n++){
-        Serial.print("\t");
-        Serial.print(amplitudes[n]);
-        Serial.print("\t");
-        Serial.print(fases[n]);
-        Serial.print("\t");
+        Serial.print("(");
+        Serial.print(amplitudes[n],3);
+        Serial.print(";");
+        Serial.print(fases[n],3);
+        Serial.print(")\t");
       }
       Serial.println();
       break; 
