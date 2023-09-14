@@ -103,7 +103,8 @@ void processacomandoserial(){
       wire_envia_byte(0X57,1); // Avisando eletrodo7 da nova frequencia
       wire_envia_byte(0X58,1); // Avisando eletrodo8 da nova frequencia
       tempo_demodulacao = 50;
-      Serial.println("200Khz 6 pontos (6 pts = 2 ciclos)");
+      Serial.print("200Khz 6 pontos (6 pts = 2 ciclos) e tempo de demod = ");
+      Serial.println(tempo_demodulacao);
       break;
    
     case '2': // 125Khz 24 pontos (24pts = 5 ciclos)
@@ -117,7 +118,8 @@ void processacomandoserial(){
       wire_envia_byte(0X57,2); // Avisando eletrodo7 da nova frequencia
       wire_envia_byte(0X58,2); // Avisando eletrodo8 da nova frequencia
       tempo_demodulacao = 250;
-      Serial.println("125Khz 24 pontos (24pts = 5 ciclos)");
+      Serial.print("125Khz 24 pontos (24pts = 5 ciclos) e tempo de demod = ");
+      Serial.println(tempo_demodulacao);
       break;
    
     case '3': // 100Khz 12 pontos (12 pts = 2 ciclos)
@@ -131,7 +133,8 @@ void processacomandoserial(){
       wire_envia_byte(0X57,3); // Avisando eletrodo7 da nova frequencia
       wire_envia_byte(0X58,3); // Avisando eletrodo8 da nova frequencia
       tempo_demodulacao = 125;
-      Serial.println("100Khz 12 pontos (12 pts = 2 ciclos)");
+      Serial.print("100Khz 12 pontos (12 pts = 2 ciclos) e tempo de demod = ");
+      Serial.println(tempo_demodulacao);
       break;
     
     case '4': // 50Khz 24 pontos (24 pts = 2 ciclos)
@@ -145,7 +148,20 @@ void processacomandoserial(){
       wire_envia_byte(0X57,4); // Avisando eletrodo7 da nova frequencia
       wire_envia_byte(0X58,4); // Avisando eletrodo8 da nova frequencia
       tempo_demodulacao = 250;
-      Serial.println("50Khz 24 pontos (24 pts = 2 ciclos)");
+      Serial.print("50Khz 24 pontos (24 pts = 2 ciclos) e tempo de demod = ");
+      Serial.println(tempo_demodulacao);
+      break; 
+      
+    case '-': // diminui tempo para medida e demodulação
+      tempo_demodulacao = tempo_demodulacao - 10;
+      Serial.print("Tempo de demodulacao = ");
+      Serial.println(tempo_demodulacao);
+      break; 
+      
+    case '+': // aumenta tempo para medida e demodulação
+      tempo_demodulacao = tempo_demodulacao + 10;
+      Serial.print("Tempo de demodulacao = ");
+      Serial.println(tempo_demodulacao);
       break; 
       
     case 'i': // inicia medidas nos eletrodos
