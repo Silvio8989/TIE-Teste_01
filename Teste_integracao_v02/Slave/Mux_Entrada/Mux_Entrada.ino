@@ -186,12 +186,20 @@ void processacomando(){
   if(comando < 0xFF) liga_canal(comando);
   else liga_canal(0);
   comando = 0;
+<<<<<<< HEAD
   delay(100); // para ver o LED acesso
+=======
+  dela(2); // para ver o LED acesso
+>>>>>>> 60e701544c5871035a019e86fa6ef1df000e4525
   digitalWrite(LED, HIGH); // Verificação de funcionamento
 }
 
 void setup() {
+<<<<<<< HEAD
   Wire.begin(MEU_ENDERECO); //Endereço do MUX
+=======
+  Wire.begin(MEU_ENDERECO); Endereço do MUX
+>>>>>>> 60e701544c5871035a019e86fa6ef1df000e4525
   Wire.onReceive(dadorecebido);    // register event
   configura_pinos_mux();
   liga_canal(0);

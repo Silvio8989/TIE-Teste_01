@@ -17,6 +17,7 @@ float fases[NUM_ELETRODOS];
 float amplitudes_frame[NUM_ELETRODOS*NUM_ELETRODOS];
 float fases_frame[NUM_ELETRODOS*NUM_ELETRODOS];
 
+<<<<<<< HEAD
 
 
 // avisando aos eletodos para iniciar nova leitura
@@ -25,6 +26,10 @@ void inicia_leitura_eletrodos(){
 }
 
 // Configurando os muxs e avisando aos eletodos para iniciar nova leitura
+=======
+
+// avisando aos eletodos para iniciar nova leitura
+>>>>>>> 60e701544c5871035a019e86fa6ef1df000e4525
 void inicia_leitura_um_frame(byte padrao){
   for (byte n = 0; n < num_eletrodos_usados; n++){ 
     // Passo 1: Ajusta os mux
