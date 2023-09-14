@@ -3,7 +3,7 @@
 #define NUM_ELETRODOS 8
 byte num_eletrodos_usados = NUM_ELETRODOS; // mudar para: int num_eletrodos_usados = NUM_ELETRODOS
 
-int tempo_demodulacao = 50; // tempo em ms que demora a leitura e demodulacao
+int tempo_demodulacao = 2; // tempo em ms que demora a leitura e demodulacao
 
 typedef union{
   float floatingPoint;
@@ -77,7 +77,7 @@ void setup()
   Wire.begin(); // join i2c bus (address optional for master)
   delay(300);  // aguarda 300ms para os slaves ligarem
   wire_envia_byte(0X40,1); // Inciando gerador em 200kHz
-  tempo_demodulacao = 50;
+  tempo_demodulacao = 2;
   Serial.begin(115200);
 }
 
@@ -102,7 +102,7 @@ void processacomandoserial(){
       wire_envia_byte(0X56,1); // Avisando eletrodo6 da nova frequencia
       wire_envia_byte(0X57,1); // Avisando eletrodo7 da nova frequencia
       wire_envia_byte(0X58,1); // Avisando eletrodo8 da nova frequencia
-      tempo_demodulacao = 50;
+      tempo_demodulacao = 2;
       Serial.print("200Khz 6 pontos (6 pts = 2 ciclos) e tempo de demod = ");
       Serial.println(tempo_demodulacao);
       break;
@@ -117,7 +117,7 @@ void processacomandoserial(){
       wire_envia_byte(0X56,2); // Avisando eletrodo6 da nova frequencia
       wire_envia_byte(0X57,2); // Avisando eletrodo7 da nova frequencia
       wire_envia_byte(0X58,2); // Avisando eletrodo8 da nova frequencia
-      tempo_demodulacao = 250;
+      tempo_demodulacao = 10;
       Serial.print("125Khz 24 pontos (24pts = 5 ciclos) e tempo de demod = ");
       Serial.println(tempo_demodulacao);
       break;
@@ -132,7 +132,7 @@ void processacomandoserial(){
       wire_envia_byte(0X56,3); // Avisando eletrodo6 da nova frequencia
       wire_envia_byte(0X57,3); // Avisando eletrodo7 da nova frequencia
       wire_envia_byte(0X58,3); // Avisando eletrodo8 da nova frequencia
-      tempo_demodulacao = 125;
+      tempo_demodulacao = 5;
       Serial.print("100Khz 12 pontos (12 pts = 2 ciclos) e tempo de demod = ");
       Serial.println(tempo_demodulacao);
       break;
@@ -147,19 +147,19 @@ void processacomandoserial(){
       wire_envia_byte(0X56,4); // Avisando eletrodo6 da nova frequencia
       wire_envia_byte(0X57,4); // Avisando eletrodo7 da nova frequencia
       wire_envia_byte(0X58,4); // Avisando eletrodo8 da nova frequencia
-      tempo_demodulacao = 250;
+      tempo_demodulacao = 10;
       Serial.print("50Khz 24 pontos (24 pts = 2 ciclos) e tempo de demod = ");
       Serial.println(tempo_demodulacao);
       break; 
       
     case '-': // diminui tempo para medida e demodulação
-      tempo_demodulacao = tempo_demodulacao - 10;
+      tempo_demodulacao = tempo_demodulacao - 1;
       Serial.print("Tempo de demodulacao = ");
       Serial.println(tempo_demodulacao);
       break; 
       
     case '+': // aumenta tempo para medida e demodulação
-      tempo_demodulacao = tempo_demodulacao + 10;
+      tempo_demodulacao = tempo_demodulacao + 1;
       Serial.print("Tempo de demodulacao = ");
       Serial.println(tempo_demodulacao);
       break; 
