@@ -149,7 +149,7 @@ void processacomandoserial(){
       break; 
       
     case 'i': // inicia medidas nos eletrodos
-      //inicia_leitura_eletrodos();
+      inicia_leitura_eletrodos();
       Serial.println("Leitura dos eletrodos iniciada...");
       break; 
       
