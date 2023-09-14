@@ -187,11 +187,11 @@ void processacomandoserial(){
     case 'f': // pega 1 frame
       inicia_leitura_um_frame(1);
       for (byte n = 0; n < num_eletrodos_usados*num_eletrodos_usados; n++){
-        Serial.print("\t");
-        Serial.print(amplitudes_frame[n]);
-        Serial.print("\t");
-        Serial.print(fases_frame[n]);
-        Serial.println("\t");
+        Serial.print("(");
+        Serial.print(amplitudes_frame[n],3);
+        Serial.print(";");
+        Serial.print(fases_frame[n],3);
+        Serial.print(")\t");
       }
       Serial.println();      
       break;
