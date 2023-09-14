@@ -1,5 +1,6 @@
 #include <Wire_slave.h>
 
+#define MEU_ENDERECO 0x60
 
 #define S0 PA2 //LSB
 #define S1 PA3 
@@ -190,7 +191,7 @@ void processacomando(){
 }
 
 void setup() {
-  Wire.begin(0X60); Endereço do MUX
+  Wire.begin(MEU_ENDERECO); Endereço do MUX
   Wire.onReceive(dadorecebido);    // register event
   configura_pinos_mux();
   liga_canal(0);
