@@ -186,7 +186,7 @@ void processacomando(){
   if(comando < 0xFF) liga_canal(comando);
   else liga_canal(0);
   comando = 0;
-  delay(100); // para ver o LED acesso
+  delay(2); // para ver o LED acesso
   digitalWrite(LED, HIGH); // Verificação de funcionamento
 }
 
