@@ -193,6 +193,7 @@ void processacomando(){
 void setup() {
   Wire.begin(MEU_ENDERECO); //Endereço do MUX
   Wire.onReceive(dadorecebido);    // register event
+  pinMode(LED, OUTPUT);
   configura_pinos_mux();
   liga_canal(0);
 }
@@ -200,6 +201,6 @@ void setup() {
 void loop() {
   contador = contador+1;
   if(comando!=0) processacomando();
-  if(contador>1000) digitalWrite(LED, HIGH); // Verificação de funcionamento
+  if(contador>10000) digitalWrite(LED, HIGH); // Verificação de funcionamento
   else digitalWrite(LED, LOW); // Verificação de funcionamento
 }

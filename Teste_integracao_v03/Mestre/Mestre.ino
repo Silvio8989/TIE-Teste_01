@@ -202,6 +202,17 @@ void processacomandoserial(){
       Serial.println("Injetando nos eletrodos 1 e 2");      
       break;
      
+    case 'b': // altear mux para padrão de injeção 2-3
+      wire_envia_byte(0X60, 2);
+      wire_envia_byte(0X61, 3);
+      Serial.println("Injetando nos eletrodos 2 e 3");      
+      break;
+
+    case 'c': // altear mux para padrão de injeção 3-4
+      wire_envia_byte(0X60, 3);
+      wire_envia_byte(0X61, 4);
+      Serial.println("Injetando nos eletrodos 3 e 4");      
+      break;
     default:
       break;
   }
