@@ -40,7 +40,7 @@ uint16_t datav2[NUM_SAMPLES_MAX+1];
 uint8 ADC1_Sequence[]={8,0,0,0,0,0};   // ADC1 channels sequence, left to right. Unused values must be 0. Note that these are ADC channels, not pins  
 uint8 ADC2_Sequence[]={9,0,0,0,0,0};   // ADC2 channels sequence, left to right. Unused values must be 0
 
-byte comando = 0;
+
 
 void dadorecebido(int howmany){
   comando = Wire.read();   

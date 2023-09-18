@@ -3,6 +3,7 @@
 #define NUM_ELETRODOS 8
 byte num_eletrodos_usados = NUM_ELETRODOS; // mudar para: int num_eletrodos_usados = NUM_ELETRODOS
 
+#define GANHO_CORRENTE (1000.0/(47*2.8)) // Para corrente em mA (R_sent = 47ohm; G_ina = 2.8)
 int tempo_demodulacao = 2; // tempo em ms que demora a leitura e demodulacao
 
 typedef union{
@@ -17,6 +18,7 @@ float fases[NUM_ELETRODOS];
 float amplitudes_frame[NUM_ELETRODOS*NUM_ELETRODOS];
 float fases_frame[NUM_ELETRODOS*NUM_ELETRODOS];
 
+float ampli_corrente[NUM_ELETRODOS], fase_corrente[NUM_ELETRODOS];
 
 
 // avisando aos eletodos para iniciar nova leitura
@@ -35,13 +37,15 @@ void inicia_leitura_um_frame(byte padrao){
     for (byte m = 0; m < num_eletrodos_usados; m++){ 
       wire_envia_byte(0X51+m,'i'); // inicia leitura dos eletrodos
     }
-    //wire_envia_byte(0X40,'i'); // inicia leitura da corrente
+    wire_envia_byte(0X40,'i'); // inicia leitura da corrente
 
     // Passo 3: Aguarda a leitura e a demodulação
     delay(tempo_demodulacao); // deixar o menor possível que nunca dê erro
 
     // Passo 4: Ler amplitudes e fases
     pega_leitura_eletrodos();
+    pega_leitura_de_um_eletrodo(0X40, &ampli_corrente[n], &fase_corrente[n]);
+    ampli_corrente[n] = ampli_corrente[n]*GANHO_CORRENTE;
     for (byte m = 0; m < num_eletrodos_usados; m++){
       amplitudes_frame[m+(n*num_eletrodos_usados)] = amplitudes[m];
       fases_frame[m+(n*num_eletrodos_usados)] = fases[m];
@@ -61,15 +65,13 @@ void pega_leitura_de_um_eletrodo(byte endereco, float *amplitude, float *fase){
   *fase = fase_lida.floatingPoint;
 }
 
-
 void pega_leitura_eletrodos(){
   for (byte n = 0; n < num_eletrodos_usados; n++){
     float ampl, pha;
     pega_leitura_de_um_eletrodo(0X51+n, &ampl, &pha);
     amplitudes[n] = ampl;
     fases[n] = pha;
-  }
-  
+  } 
 }
 
 void setup()
@@ -207,6 +209,15 @@ void processacomandoserial(){
         Serial.print(")\t");
       }
       Serial.println();      
+      Serial.println();      
+      for (byte n = 0; n < num_eletrodos_usados; n++){
+        Serial.print("(");
+        Serial.print(ampli_corrente[n],3);
+        Serial.print(";");
+        Serial.print(fase_corrente[n],3);
+        Serial.print(")\t");        
+      }
+      Serial.println(" [mA]"); 
       break;
 
     case 'a': // altear mux para padrão de injeção 1-2
