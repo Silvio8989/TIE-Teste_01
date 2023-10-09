@@ -131,7 +131,7 @@ void loop()
       inicia_leitura_um_frame(pula);
       for (byte n1 = 0; n1 < num_eletrodos_usados; n1++){
         for (byte n2 = 0; n2 < num_eletrodos_usados; n2++){
-          n = n1*num_eletrodos_usados + n2;
+          byte n = n1*num_eletrodos_usados + n2;
           if(flag_envia_impedancia){
             imprime_uma_medida_limpa(amplitudes_frame[n]/ampli_corrente[n1],fases_frame[n]-fase_corrente[n1]);
           }
